@@ -18,3 +18,8 @@ variable "secret_key" {
   sensitive   = true
   default     = ""
 }
+variable "vpc_cidr_block" {
+  description = "The CICR block of the VPC"
+  type = string
+  default = ""
+}
