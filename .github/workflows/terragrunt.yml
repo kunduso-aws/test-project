@@ -8,9 +8,70 @@ on:
     branches: [ "main" ]
 
 jobs:
-  DeployToDev:
-    name: 'deploy-to-dev'
+  DeployToAccountA:
+    name: 'deploy-to-account-A'
     runs-on: ubuntu-latest
+    environment: AccountA
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    permissions:
+      pull-requests: write
+      id-token: write
+      contents: read
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS Credentials Action For GitHub Actions
+      uses: aws-actions/configure-aws-credentials@v1-node16
+      with:
+        role-to-assume: ${{ secrets.IAM_ROLE }}
+        role-session-name: AWSSession
+        aws-region: us-east-2
+
+    # Install the latest version of Terragrunt CLI and configure the Terragrunt CLI configuration file with a Terragrunt Cloud user API token
+    - name: Setup Terraform v1.2.6
+      uses: hashicorp/setup-Terraform@v1
+      with:
+        terraform_version: 1.2.6
+        terraform_wrapper: true
+    - name: Setup Terraform version
+      run: terraform --version
+    - name: Setup Terraform wrapper path
+      run: which terraform
+
+    - name: Setup Terragrunt v0.38.4
+      run: |
+        sudo wget -q -O /bin/terragrunt "https://github.com/gruntwork-io/terragrunt/releases/download/v0.38.4/terragrunt_linux_amd64"
+        sudo chmod +x /bin/terragrunt
+        terragrunt -v
+
+    # Initialize a new or existing Terragrunt working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terragrunt Init
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terragrunt init --terragrunt-non-interactive
+
+    # Generates an execution plan for Terragrunt
+    - name: Terragrunt Plan
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terragrunt run-all plan --terragrunt-non-interactive
+
+      # On push to main, build or change infrastructure according to Terragrunt configuration files
+      # Note: It is recommended to set up a required "strict" status check in your repository for "Terragrunt Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+    - name: Terragrunt Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terragrunt run-all apply --terragrunt-non-interactive
+
+  DeployToAccountB:
+    name: 'deploy-to-account-B'
+    runs-on: ubuntu-latest
+    environment: AccountB
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
