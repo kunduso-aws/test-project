@@ -1,4 +1,4 @@
-name: 'Terragrunt CI'
+name: 'Deploy-to-multiple-aws-accounts'
 
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -8,8 +8,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  Terragrunt:
-    name: 'Terragrunt'
+  DeployToDev:
+    name: 'deploy-to-dev'
     runs-on: ubuntu-latest
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
@@ -21,6 +21,13 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v2
+
+    - name: Configure AWS Credentials Action For GitHub Actions
+      uses: aws-actions/configure-aws-credentials@v1-node16
+      with:
+        role-to-assume: ${{ secrets.IAM_ROLE }}
+        role-session-name: AWSSession
+        aws-region: us-east-2
 
     # Install the latest version of Terragrunt CLI and configure the Terragrunt CLI configuration file with a Terragrunt Cloud user API token
     - name: Setup Terraform v1.2.6
