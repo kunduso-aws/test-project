@@ -17,6 +17,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: ./accounts/AccountA
 
     permissions:
       pull-requests: write
@@ -54,19 +55,19 @@ jobs:
 
     # Initialize a new or existing Terragrunt working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terragrunt Init
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terragrunt init --terragrunt-non-interactive
+      #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terragrunt init --terragrunt-non-interactive --terragrunt-iam-role "arn:aws:iam::${{ secrets.ACCOUNTNUMBER }}:role/terragrunt-role"
 
     # Generates an execution plan for Terragrunt
     - name: Terragrunt Plan
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terragrunt run-all plan --terragrunt-non-interactive
+      run: terragrunt plan --terragrunt-non-interactive
 
       # On push to main, build or change infrastructure according to Terragrunt configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terragrunt Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terragrunt Apply
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terragrunt run-all apply --terragrunt-non-interactive
+      run: terragrunt apply --terragrunt-non-interactive
 
   DeployToAccountB:
     name: 'deploy-to-account-B'
@@ -78,6 +79,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: ./accounts/AccountB
 
     permissions:
       pull-requests: write
@@ -115,8 +117,8 @@ jobs:
 
     # Initialize a new or existing Terragrunt working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terragrunt Init
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      run: terragrunt init --terragrunt-non-interactive
+      #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terragrunt init --terragrunt-non-interactive --terragrunt-iam-role "arn:aws:iam::ACCOUNT_ID:role/ROLE_NAME"
 
     # Generates an execution plan for Terragrunt
     - name: Terragrunt Plan
