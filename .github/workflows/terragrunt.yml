@@ -71,6 +71,7 @@ jobs:
   DeployToAccountB:
     name: 'deploy-to-account-B'
     runs-on: ubuntu-latest
+    needs: DeployToAccountA
     environment: AccountB
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
