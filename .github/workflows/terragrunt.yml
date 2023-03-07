@@ -17,6 +17,11 @@ jobs:
       run:
         shell: bash
 
+    permissions:
+      pull-requests: write
+      id-token: write
+      contents: read
+
     steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
