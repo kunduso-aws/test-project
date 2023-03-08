@@ -18,7 +18,7 @@ variable "secret_key" {
   sensitive   = true
   default     = ""
 }
-variable "vpc_cidr_block" {
+variable "vpc_address_space" {
   description = "The CICR block of the VPC"
   type = string
   default = ""
