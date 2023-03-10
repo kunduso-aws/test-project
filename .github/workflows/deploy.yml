@@ -23,14 +23,14 @@ jobs:
     # accommodating monorepo, this sets the working directory at the job level, for multi repo, defaults to "."
     defaults:
       run:
-        working-directory: ${{ inputs.working-directory }}
+        shell: bash
+        working-directory: ./accounts/AccountA
     steps:
     - name: test-step
       run: echo "Hello World!"
 
-
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Configure AWS Credentials Action For GitHub Actions
       uses: aws-actions/configure-aws-credentials@v1-node16
