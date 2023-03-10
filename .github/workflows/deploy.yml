@@ -24,13 +24,8 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: .
+        working-directory: ${{ inputs.working-directory }}
     steps:
-    - name: test-step
-      run: pwd
-    - name: check folders
-      run: ls
-      working-directory: .
     - name: Checkout
       uses: actions/checkout@v3
 
