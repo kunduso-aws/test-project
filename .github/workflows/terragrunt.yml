@@ -8,7 +8,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  reusable_workflow_job:
+  DeployToAccountA:
     runs-on: ubuntu-latest
     environment: AccountA
     name: 'deploy-to-account-A'
