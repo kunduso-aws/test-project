@@ -14,13 +14,11 @@ on:
         default: '.'
 
 jobs:
-
   deploy:
     name: Deploy to AWS Account
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
 
-    # accommodating monorepo, this sets the working directory at the job level, for multi repo, defaults to "."
     defaults:
       run:
         shell: bash
