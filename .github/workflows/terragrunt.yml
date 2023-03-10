@@ -9,22 +9,21 @@ on:
 
 jobs:
   DeployToAccountA:
-    runs-on: ubuntu-latest
-    environment: AccountA
+    # runs-on: ubuntu-latest
+    # environment: AccountA
     name: 'deploy-to-account-A'
     permissions:
       pull-requests: write
       id-token: write
       contents: read
-    steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
-
-    - name: DeployToAccountA
-      uses: ./.github/workflows/deploy-to-account.yml
-      with:
-        working-directory: ./accounts/AccountA
+    # steps:
+    # # Checkout the repository to the GitHub Actions runner
+    # - name: Checkout
+    #   uses: actions/checkout@v3
+    uses: ./.github/workflows/deploy.yml
+    with:
+      working-directory: ./accounts/AccountA
+      environment: AccountA
 
 
 
