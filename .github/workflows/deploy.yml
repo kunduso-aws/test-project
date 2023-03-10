@@ -24,7 +24,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: accounts/AccountA
+        working-directory: .
     steps:
     - name: test-step
       run: echo "Hello World!"
