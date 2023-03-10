@@ -28,7 +28,8 @@ jobs:
     steps:
     - name: test-step
       run: pwd
-
+    - name: check folders
+      run: ls
     - name: Checkout
       uses: actions/checkout@v3
 
