@@ -21,10 +21,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
 
-    # - name: DeployToAccountA
-    #   uses: ./.github/workflows/deploy-to-account.yml
-    #   with:
-    #     working-directory: ./accounts/AccountA
+    - name: DeployToAccountA
+      uses: ./.github/workflows/deploy-to-account.yml
+      with:
+        working-directory: ./accounts/AccountA
 
 
 
