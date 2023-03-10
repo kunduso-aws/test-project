@@ -27,7 +27,7 @@ jobs:
         working-directory: .
     steps:
     - name: test-step
-      run: echo "Hello World!"
+      run: pwd
 
     - name: Checkout
       uses: actions/checkout@v3
