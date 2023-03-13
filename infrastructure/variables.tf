@@ -20,6 +20,6 @@ variable "secret_key" {
 }
 variable "vpc_address_space" {
   description = "The CICR block of the VPC"
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }
