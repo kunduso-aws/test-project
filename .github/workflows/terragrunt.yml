@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [ "main" ]
     types: [ closed ]
-
+permissions: read-all
 jobs:
   DeployToAccountA:
     if: github.event.pull_request.merged == true
