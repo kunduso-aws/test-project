@@ -18,7 +18,10 @@ jobs:
     name: Deploy to AWS Account
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-
+    permissions:
+      pull-requests: write
+      id-token: write
+      contents: read
     defaults:
       run:
         shell: bash
