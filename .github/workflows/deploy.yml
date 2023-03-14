@@ -1,5 +1,5 @@
 name: Deploy Terragrunt-Terraform to each AWS account
-
+permissions: read-all
 on:
   workflow_call:
     inputs:

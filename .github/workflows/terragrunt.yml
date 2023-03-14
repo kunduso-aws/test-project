@@ -22,6 +22,7 @@ jobs:
       working-directory: ./accounts/AccountA
       environment: AccountA
     secrets: inherit
+    permissions: inherit
 
   # DeployToAccountB:
   #   name: 'deploy-to-account-B'
