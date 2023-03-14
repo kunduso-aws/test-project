@@ -1,5 +1,5 @@
 name: Deploy Terragrunt-Terraform to each AWS account
-
+permissions: read-all
 on:
   workflow_call:
     inputs:
@@ -18,7 +18,10 @@ jobs:
     name: Deploy to AWS Account
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-
+    permissions:
+      pull-requests: write
+      id-token: write
+      contents: read
     defaults:
       run:
         shell: bash
