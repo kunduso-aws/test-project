@@ -7,8 +7,7 @@ resource "aws_flow_log" "app1" {
 }
 data "aws_caller_identity" "current" {}
 locals {
-  account_id = arn:aws:logs:us-east-2:data.aws_caller_identity.current.account_id:log-group:vpc-flowlog:*
-  
+  account_id = "arn:aws:logs:us-east-2:data.aws_caller_identity.current.account_id:log-group:vpc-flowlog:*"
 }
 resource "aws_cloudwatch_log_group" "cw_loggroup" {
   name = "vpc-flowlog"
