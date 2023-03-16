@@ -6,7 +6,10 @@ resource "aws_flow_log" "app1" {
   vpc_id          = aws_vpc.this.id
 }
 data "aws_caller_identity" "current" {}
-
+locals {
+  account_id = "arn:aws:logs:us-east-2:$(data.aws_caller_identity.current.account_id):log-group:vpc-flowlog:*"
+  
+}
 resource "aws_cloudwatch_log_group" "cw_loggroup" {
   name = "vpc-flowlog"
   retention_in_days = 14
@@ -42,7 +45,7 @@ data "aws_iam_policy_document" "vpc_flowlog_policy" {
       "logs:DescribeLogStreams",
     ]
 
-    resources = ["arn:aws:logs:us-east-2:data.aws_caller_identity.current.account_id:log-group:vpc-flowlog:*"]
+    resources = [local.account_id]
   }
 }
 
