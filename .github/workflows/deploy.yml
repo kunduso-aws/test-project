@@ -25,12 +25,10 @@ permissions:
   repository-projects: none
   security-events: none
   statuses: none
-env:
-  # Setting an environment variable with the value of a configuration variable
-  env_var: ${{ vars.ENV_CONTEXT_VAR }}
+
 jobs:
   deploy:
-    name: ${{ vars.JOB_NAME }}
+    name: Deploy to ${{ inputs.environment }}
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     defaults:
