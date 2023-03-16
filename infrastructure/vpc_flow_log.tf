@@ -7,7 +7,7 @@ resource "aws_flow_log" "app1" {
 }
 
 resource "aws_cloudwatch_log_group" "cw_loggroup" {
-  name = "example"
+  name = "vpc-flowlog"
   retention_in_days = 14
 }
 
@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "vpc_flowlog_policy" {
       "logs:DescribeLogStreams",
     ]
 
-    resources = ["resource-arn"]
+    resources = ["arn:aws:logs:us-east-2:*:log-group:vpc-flowlog:*"]
   }
 }
 
