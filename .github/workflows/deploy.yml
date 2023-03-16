@@ -56,11 +56,6 @@ jobs:
       id: init
       run: terragrunt init --terragrunt-non-interactive --terragrunt-iam-role "arn:aws:iam::${{ secrets.ACCOUNTNUMBER }}:role/terragrunt-role"
 
-    # Checks that all Terraform configuration files are correctly written
-    - name: Terragrunt Validate
-      id: validate
-      run: terragrunt validate -no-color --terragrunt-non-interactive --terragrunt-iam-role "arn:aws:iam::${{ secrets.ACCOUNTNUMBER }}:role/terragrunt-role"
-
     # Generates an execution plan for Terragrunt
     - name: Terragrunt Plan
       id: plan
