@@ -44,9 +44,8 @@ data "aws_iam_policy_document" "vpc_flowlog_policy" {
       "logs:DescribeLogStreams",
     ]
 
-    resources = ["arn:aws:logs:us-east-2:${data.aws_caller_identity.current.account_id}:log-group:vpc-flowlog:*"]
-    #resources = [aws_cloudwatch_log_group.cw_loggroup.arn ":*"]
-    #arn:aws:logs:us-east-2:796344116454:log-group:vpc-flowlog
+    #resources = ["arn:aws:logs:us-east-2:${data.aws_caller_identity.current.account_id}:log-group:vpc-flowlog:*"]
+    resources = ["arn:aws:logs:us-east-2:${data.aws_caller_identity.current.account_id}:log-group:${aws_cloudwatch_log_group.cw_loggroup.name}:*"]
   }
 }
 
