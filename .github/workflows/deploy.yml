@@ -1,4 +1,4 @@
-name: 'Deploy resources to each AWS account -${{ env.CUSTOMERNAME }}'
+name: 'Deploy resources to each AWS account'
 on:
   workflow_call:
     inputs:
