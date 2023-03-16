@@ -28,14 +28,14 @@ on:
 permissions:
   actions: none
   checks: none
-  contents: none
+  contents: read
   deployments: none
-  id-token: none
+  id-token: write
   issues: none
   discussions: none
   packages: none
   pages: none
-  pull-requests: none
+  pull-requests: write
   repository-projects: none
   security-events: none
   statuses: none
