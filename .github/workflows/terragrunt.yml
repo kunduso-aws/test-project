@@ -13,9 +13,9 @@ jobs:
   DeployToAccountA:
     if: github.event.pull_request.merged == true
     name: 'deploy-to-account-A'
-    # permissions:
-      # pull-requests: write
-      # id-token: write
+    permissions:
+      pull-requests: write
+      id-token: write
       # contents: read
 
     uses: ./.github/workflows/deploy.yml
