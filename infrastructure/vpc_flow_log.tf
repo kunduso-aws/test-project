@@ -41,7 +41,7 @@ data "aws_iam_policy_document" "vpc_flowlog_policy" {
       "logs:DescribeLogStreams",
     ]
 
-    resources = ["*"]
+    resources = ["resource-arn"]
   }
 }
 
