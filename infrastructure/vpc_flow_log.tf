@@ -8,6 +8,7 @@ resource "aws_flow_log" "app1" {
 
 resource "aws_cloudwatch_log_group" "cw_loggroup" {
   name = "example"
+  retention_in_days = 14
 }
 
 data "aws_iam_policy_document" "assume_role" {
