@@ -5,7 +5,7 @@ resource "aws_flow_log" "app1" {
   traffic_type    = "ALL"
   vpc_id          = aws_vpc.this.id
 }
-# data "aws_caller_identity" "current" {}
+ data "aws_caller_identity" "current" {}
 locals {
   arn = format("aws_cloudwatch_log_group.cw_loggroup.arn%s", ":*")
 }
@@ -44,7 +44,9 @@ data "aws_iam_policy_document" "vpc_flowlog_policy" {
       "logs:DescribeLogStreams",
     ]
 
-    resources = ["aws_cloudwatch_log_group.cw_loggroup.arn:*"]
+    resources = ["arn:aws:logs:us-east-2:${data.aws_caller_identity.current.account_id}:log-group:vpc-flowlog:*"]
+    #resources = [aws_cloudwatch_log_group.cw_loggroup.arn ":*"]
+    #arn:aws:logs:us-east-2:796344116454:log-group:vpc-flowlog
   }
 }
 
