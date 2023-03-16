@@ -7,7 +7,7 @@ resource "aws_flow_log" "app1" {
 }
 # data "aws_caller_identity" "current" {}
 locals {
-  arn = format("aws_cloudwatch_log_group.cw_loggroup.arn,%s", ":*")
+  arn = format("aws_cloudwatch_log_group.cw_loggroup.arn%s", ":*")
 }
 resource "aws_cloudwatch_log_group" "cw_loggroup" {
   name = "vpc-flowlog"
