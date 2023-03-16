@@ -1,4 +1,4 @@
-name: Deploy resources to each AWS account
+name: 'Deploy resources to each AWS account -${{ vars.CUSTOMERNAME }}'
 on:
   workflow_call:
     inputs:
@@ -11,7 +11,9 @@ on:
         required: true
         type: string
         default: '.'
-
+env:
+  # Setting an environment variable with the value of a configuration variable
+  env_var: ${{ vars.CUSTOMERNAME }}
 jobs:
   deploy:
     name: Deploy to AWS Account
