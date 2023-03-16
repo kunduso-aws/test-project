@@ -11,7 +11,7 @@ on:
 permissions: read-all
 jobs:
   DeployToAccountA:
-    if: github.event.pull_request.merged == true
+    #if: github.event.pull_request.merged == true
     name: 'deploy-to-account-A'
     permissions:
       pull-requests: write
