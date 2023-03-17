@@ -11,20 +11,6 @@ on:
         required: true
         type: string
         default: '.'
-# permissions:
-#   actions: read|write|none
-#   checks: read|write|none
-#   contents: read|write|none
-#   deployments: read|write|none
-#   id-token: read|write|none
-#   issues: read|write|none
-#   discussions: read|write|none
-#   packages: read|write|none
-#   pages: read|write|none
-#   pull-requests: read|write|none
-#   repository-projects: read|write|none
-#   security-events: read|write|none
-#   statuses: read|write|none
 permissions:
   actions: none
   checks: none
@@ -39,12 +25,10 @@ permissions:
   repository-projects: none
   security-events: none
   statuses: none
-# env:
-#   # Setting an environment variable with the value of a configuration variable
-#   env_var: ${{ env.CUSTOMERNAME }}
+
 jobs:
   deploy:
-    name: Deploy to AWS Account
+    name: Deploy to ${{ inputs.environment }}
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     defaults:
@@ -129,5 +113,6 @@ jobs:
       # On push to main, build or change infrastructure according to Terragrunt configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terragrunt Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terragrunt Apply
+      # commented out below so that I can test quickly. Remove this comment after testing is done.
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       run: terragrunt apply -auto-approve --terragrunt-iam-role "arn:aws:iam::${{ secrets.ACCOUNTNUMBER }}:role/terragrunt-role"
