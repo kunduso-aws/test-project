@@ -22,16 +22,16 @@ jobs:
       environment: AccountA
     secrets: inherit
 
-  # DeployToAccountB:
-  #   name: 'deploy-to-account-B'
-  #   needs: DeployToAccountA
-  #   permissions:
-  #     pull-requests: write
-  #     id-token: write
-  #     contents: read
+  DeployToAccountB:
+    name: 'deploy-to-account-B'
+    needs: DeployToAccountA
+    permissions:
+      pull-requests: write
+      id-token: write
+      contents: read
 
-  #   uses: ./.github/workflows/deploy.yml
-  #   with:
-  #     working-directory: ./accounts/AccountB
-  #     environment: AccountB
-  #   secrets: inherit
+    uses: ./.github/workflows/deploy.yml
+    with:
+      working-directory: ./accounts/AccountB
+      environment: AccountB
+    secrets: inherit
