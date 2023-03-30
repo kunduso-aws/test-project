@@ -14,5 +14,6 @@ remote_state {
         bucket = "terraform-remote-state-${get_aws_account_id()}"
         key = "tf/CustomerName/${path_relative_to_include()}/terraform.tfstate"
         region = "us-east-2"
+        dynamodb_table = "terraform-remote-state-lock-${get_aws_account_id()}"
     }
 }
